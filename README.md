@@ -1,6 +1,6 @@
 ![](https://avatars3.githubusercontent.com/u/33419517)
 
-# Mysql(https://github.com/fangguizhen/Notes/blob/master/Mysql.md)
+# Mysql（https://github.com/fangguizhen/Notes/blob/master/Mysql.md）
 
 # Golang知识点
 
