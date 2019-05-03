@@ -75,6 +75,6 @@ M关联了一个内核线程，通过调度器P（上下文）的调度，可以
 ## 持续更新中..
 
 ## 问题反馈
-* 邮件:qq邮箱1297394526@qq.com
+* 邮件:1297394526@qq.com
 * QQ:1297394526
 * Github: [@fangguizhen](https://github.com/fangguizhen)
