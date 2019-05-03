@@ -8,3 +8,8 @@
 * 4、持久性
 
 ## 持续更新中..
+
+## 问题反馈
+* 邮件:[qq邮箱](1297394526@qq.com)
+* QQ:1297394526
+* Github: [@fangguizhen](https://github.com/fangguizhen)
