@@ -1,5 +1,7 @@
 ![](https://avatars3.githubusercontent.com/u/33419517)
 
+# Mysql(https://github.com/fangguizhen/Notes/blob/master/Mysql.md)
+
 # Golang知识点
 
 ## 1、Golang自增自减操作符
