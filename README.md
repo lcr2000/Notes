@@ -191,6 +191,51 @@ x = v              // x 的值为 (*T)(nil)， 动态类型为 *T, 静态类型�
 - 在很多 golang 程序中，虽然用到了指针，但是并不会对指针进行加减运算
   但是Go 还提供了一些底层的库 reflect 和 unsafe，它们可以让使用者把任意一个 Go 指针转成 uintptr 类型的值，然后再像 C++ 一样对指针做算术运算。
 
+## 24、Go中slice的len()和cap()函数有什么区别？
+
+- 对于make slice而言，有两个概念需要搞清楚：长度跟容量。
+  - 容量表示底层数组的大小，长度是你可以使用的大小。
+    容量的用处在哪？当你用 append扩展长度时，如果新的长度小于容量，不会更换底层数组，否则，go 会新申请一个底层数组，拷贝这边的值过去，把原来的数组丢掉。也就是说，容量的用途是：在数据拷贝和内存申请的消耗与内存占用之间提供一个权衡。
+  - 而长度，则是为了帮助你限制切片可用成员的数量，提供边界查询的。所以用 make 申请好空间后，需要注意不要越界【越 len 】
+  ```javascript
+  func test(){
+	var array =[]int{1,2,3,4,5}// len:5,capacity:5
+	var newArray=array[1:3]// len:2,capacity:4   (已经使用了两个位置，所以还空两位置可以append)
+	fmt.Printf("%p\n",array) //0xc420098000
+	fmt.Printf("%p\n",newArray) //0xc420098008 可以看到newArray的地址指向的是array[1]的地址，即他们底层使用的还是一个数组
+	fmt.Printf("%v\n",array) //[1 2 3 4 5]
+	fmt.Printf("%v\n",newArray) //[2 3]
+
+	newArray[1]=9 //更改后array、newArray都改变了
+	fmt.Printf("%v\n",array) // [1 2 9 4 5]
+	fmt.Printf("%v\n",newArray) // [2 9]
+
+	newArray=append(newArray,11,12)//append 操作之后，array的len和capacity不变,newArray的len变为4，capacity：4。因为这是对newArray的操作
+	fmt.Printf("%v\n",array) //[1 2 9 11 12] //注意对newArray做append操作之后，array[3],array[4]的值也发生了改变
+	fmt.Printf("%v\n",newArray) //[2 9 11 12]
+
+	newArray=append(newArray,13,14) // 因为newArray的len已经等于capacity，所以再次append就会超过capacity值，
+	// 此时，append函数内部会创建一个新的底层数组（是一个扩容过的数组），并将array指向的底层数组拷贝过去，然后在追加新的值。
+	fmt.Printf("%p\n",array) //0xc420098000
+	fmt.Printf("%p\n",newArray) //0xc4200a0000
+	fmt.Printf("%v\n",array) //[1 2 9 11 12]
+	fmt.Printf("%v\n",newArray) //[2 9 11 12 13 14]  他两已经不再是指向同一个底层数组y了
+}
+
+## 25、如何知道变量分配到堆还是栈
+
+- Go的编译器很聪明，它还会做逃逸分析(escape analysis)，在编译原理中，分析指针动态范围的方法称之为逃逸分析。通俗来讲，当一个对象的指针被多个方法或线程引用时，我们称这个指针发生了逃逸。
+- 更简单来说，逃逸分析决定一个变量是分配在堆上还是分配在栈上。
+  - 编译器会根据变量是否被外部引用来决定是否逃逸：
+    - 如果函数外部没有引用，则优先放到栈中；
+    - 如果函数外部存在引用，则必定放到堆中；
+
+注意：
+
+- 堆上动态分配内存比栈上静态分配内存，开销大很多。
+- 不要盲目使用变量的指针作为函数参数，虽然它会减少复制操作。但其实当参数为变量自身的时候，复制是在栈上完成的操作，开销远比变量逃逸后动态地在堆上分配内存少的多。
+- 变量分配在栈上需要能在编译期确定它的作用域，否则会分配到堆上。
+
 ## 持续更新中..
 
 ## 问题反馈
