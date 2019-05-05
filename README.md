@@ -237,6 +237,39 @@ x = v              // x 的值为 (*T)(nil)， 动态类型为 *T, 静态类型�
 - 不要盲目使用变量的指针作为函数参数，虽然它会减少复制操作。但其实当参数为变量自身的时候，复制是在栈上完成的操作，开销远比变量逃逸后动态地在堆上分配内存少的多。
 - 变量分配在栈上需要能在编译期确定它的作用域，否则会分配到堆上。
 
+## 26、Go的range作用？
+
+Go 中 range 关键字用于
+
+- for循环中迭代array、slice、channel或map的元素；
+- 在数组和切片中它返回元素的索引值；
+- 在map中返回 key-value 对的 key 和值。
+
+```javascript
+	m := map[string]int{
+		"tom":   18,
+		"james": 20,
+	}
+	for key, value := range m {
+		fmt.Println(key, value)
+	}
+	//tom 18
+	//james 20
+```
+
+另外
+
+- range也可以用来枚举Unicode字符串。第一个参数是字符的索引，第二个是字符（Unicode的值）本身。
+```javascript
+	//range也可以用来枚举Unicode字符串。第一个参数是字符的索引，第二个是字符（Unicode的值）本身。
+	for i, c := range "go" {
+		fmt.Println(i, c)
+	}
+	//输出
+	//0 103
+	//1 111
+```
+
 ## 持续更新中..
 
 ## 问题反馈
