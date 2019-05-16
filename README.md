@@ -269,6 +269,41 @@ Go 中 range 关键字用于
 	//0 103
 	//1 111
 ```
+## 27、下面程序打印结果
+
+```javascript
+package main
+
+func main() {
+  var x int8 = -128
+  var y = x/-1
+  println(y)
+}
+```
+
+答案：-128，因为溢出。
+
+## 28、`[3]int` 和 `[4]int` 不算同一个类型
+
+```javascript
+import (
+"fmt"
+"reflect"
+)
+
+func main(){
+arrayA := [...]int{1, 2, 3}
+arrayB := [...]int{1, 2, 3, 4}
+fmt.Println(reflect.TypeOf(arrayA) == reflect.TypeOf(arrayB))
+}
+
+```
+
+答案：false
+
+## 29、Golang的时间格式化
+
+- 不同于PHP的 `date("Y-m-d H:i:s",time())`，Golang的格式化奇葩的很，不能使用诸如 `Y-m-d H:i:s`的东西，而是使用 `2006-01-0215:04:05`这个时间的格式，请记住这个时间，据说这是Golang的诞生时间。
 
 ## 持续更新中..
 
