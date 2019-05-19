@@ -305,6 +305,24 @@ fmt.Println(reflect.TypeOf(arrayA) == reflect.TypeOf(arrayB))
 
 - 不同于PHP的 `date("Y-m-d H:i:s",time())`，Golang的格式化奇葩的很，不能使用诸如 `Y-m-d H:i:s`的东西，而是使用 `2006-01-0215:04:05`这个时间的格式，请记住这个时间，据说这是Golang的诞生时间。
 
+## 30、**Strings无法修改**
+
+- 尝试使用索引操作来更新字符串变量中的单个字符将会失败。string是只读的byte slice（和一些额外的属性）。如果你确实需要更新一个字符串，那么使用byte slice，并在需要时把它转换为string类型。
+
+```javascript
+package main
+
+import "fmt"
+
+func main() {
+    x := "text"
+    xbytes := []byte(x)
+    xbytes[0] = 'T'
+    fmt.Println(string(xbytes)) //prints Text
+}
+```
+
+## 31、
 ## 持续更新中..
 
 ## 问题反馈
