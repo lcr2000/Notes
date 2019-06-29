@@ -4,7 +4,7 @@ RPC的作用主要有三个方面：进程间通讯、提供和本地方法调�
 
 ## gRPC概述
 
-gRPC](http://www.grpc.io/)是一个高性能、通用的开源 RPC 框架，其由 Google 主要面向移动应用开发并基于[HTTP/2](https://http2.github.io/)协议标准而设计，基于[ProtoBuf](http://en.wikipedia.org/wiki/Protocol_Buffers)(Protocol Buffers) 序列化协议开发，且支持众多开发语言。gRPC 提供了一种简单的方法来精确地定义服务和为 iOS、Android 和后台支持服务自动生成可靠性很强的客户端功能库。客户端充分利用高级流和链接功能，从而有助于节省带宽、降低的 TCP 链接次数、节省 CPU 使用、和电池寿命
+[gRPC](http://www.grpc.io/)是一个高性能、通用的开源 RPC 框架，其由 Google 主要面向移动应用开发并基于[HTTP/2](https://http2.github.io/)协议标准而设计，基于[ProtoBuf](http://en.wikipedia.org/wiki/Protocol_Buffers)(Protocol Buffers) 序列化协议开发，且支持众多开发语言。gRPC 提供了一种简单的方法来精确地定义服务和为 iOS、Android 和后台支持服务自动生成可靠性很强的客户端功能库。客户端充分利用高级流和链接功能，从而有助于节省带宽、降低的 TCP 链接次数、节省 CPU 使用、和电池寿命
 
 
 
