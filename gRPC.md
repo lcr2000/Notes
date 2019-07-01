@@ -105,6 +105,108 @@ message QueryPersonRequest {
 - 客户端如何请求指定的服务端
 
 
+## 生成gRPC代码
+
+一旦定义好服务，我们可以使用protocol buffer 编译器 `protoc` 来生成创建应用所需的特定客户端和服务端的代码，可以生成任意 gRPC 支持的语言的代码。
+
+为了生成客户端和服务端接口，运行 protocol buffer 编译器：
+
+```
+protoc -I ../protos ../protos/helloworld.proto --go_out=plugins=grpc：helloworld
+```
+
+这生成了 `helloworld.pb.go` ，包含了我们生成的客户端和服务端类，此外还有用于填充、序列化、提取 `HelloRequest` 和 `HelloResponse` 消息类型的类。
+
+## 写一个服务器
+
+创建一个服务应用来实现服务
+
+### 服务实现
+
+服务器有一个 `server` 结构。它通过实现 `sayHello` 方法，实现了从 proto 服务定义生成的`GreeterServer` 接口：
+
+```
+// server is used to implement helloworld.GreeterServer.
+type server struct{}
+// SayHello implements helloworld.GreeterServer
+func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
+  return &pb.HelloReply{Message： "Hello " + in.Name}, nil
+}
+```
+
+为了返回给客户端应答并且完成调用：
+
+1. 用我们的激动人心的消息构建并填充一个在我们接口定义的 `HelloReply` 应答对象。
+2. 将 `HelloReply` 返回给客户端。
+
+### 服务端实现
+
+```
+const (
+  port = "：50051"
+)
+...
+func main() {
+  lis, err ：= net.Listen("tcp", port)
+  if err != nil {
+      log.Fatalf("failed to listen： %v", err)
+  }
+  s ：= grpc.NewServer()
+  pb.RegisterGreeterServer(s, &server{})
+  s.Serve(lis)
+}
+```
+
+## 写一个客户端
+
+客户端的 gRPC 非常简单。在这一步，用生成的代码写一个简单的客户程序来访问创建的 `Greeter` 服务器。
+
+### 连接服务
+
+需要创建一个 gRPC 频道，指定我们要连接的主机名和服务器端口。然后我们用这个频道创建存根实例。
+
+```
+const (
+  address     = "localhost：50051"
+  defaultName = "world"
+)
+func main() {
+  // Set up a connection to the server.
+  conn, err ：= grpc.Dial(address)
+  if err != nil {
+      log.Fatalf("did not connect： %v", err)
+  }
+  defer conn.Close()
+  c ：= pb.NewGreeterClient(conn)
+...
+}
+```
+
+### 调用RPC
+
+现在我们可以联系服务并获得一个 greeting ：
+
+1. 我们创建并填充一个 `HelloRequest` 发送给服务。
+2. 我们用请求调用存根的 `SayHello()`，如果 RPC 成功，会得到一个填充的 `HelloReply` ，从其中我们可以获得 greeting。
+
+```
+r, err ：= c.SayHello(context.Background(), &pb.HelloRequest{Name： name})
+if err != nil {
+      log.Fatalf("could not greet： %v", err)
+}
+log.Printf("Greeting： %s", r.Message)
+```
+
+## gRPC 的一个功能
+
+不同的语言间的互操作性，即在不同的语言运行客户端和服务端。每个服务端和客户端使用从同一个 proto 文件生成的接口代码，则意味着任何 `Greeter` 客户端可以与任何 `Greeter` 服务端对话。
+
+- 命令
+
+```
+$ greeter_server &
+```
+
 
 
 
