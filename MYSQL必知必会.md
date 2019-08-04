@@ -84,4 +84,43 @@ SHOW COLUMNS FROM customers
 
 #### DESCRIBE语句
 
-MYSQL支持用DESCRIBE作为SHOW COLUMNS FROM的一种快捷方式
+MYSQL支持用DESCRIBE作为SHOW COLUMNS FROM的一种快捷方式。
+
+### 4.1SELECT语句
+
+用途：从一个或者多个表中检索信息
+
+为了使用SELECT检索表数据，必须至少给出两条信息——想选择什么，以及从什么地方选择。
+
+### 4.2检索单个列
+
+输入
+
+```
+SELECT name
+FROM students;
+```
+
+- 结束SQL语句：多条SQL语句必须以分号分隔
+- SQL语句和大小写：SQL语句不区分大小写，如果对SQL关键字使用大写，而对所有列和表名使用小写，这样子使代码更易于阅读和调试。
+
+### 4.3检索多个列
+
+在SELECT关键字后给出多个列名，列名之间必须以逗号分隔。（最后一个列名后不用加逗号）
+
+输入
+
+```
+SELECT id,name,sex 
+FROM students;
+```
+
+上面的语句将从students表中选择3列。
+
+
+
+
+
+
+
+参考：MYSQL必知必会
