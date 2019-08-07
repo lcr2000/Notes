@@ -141,9 +141,62 @@ FROM products;
 
 *通配符。检索不需要的列通常会降低检索和应用程序的性能。
 
+### 4.5检索不同的行
+
+使用DISTINCT关键字，此关键字指示MYSQL中返回不同的值。
+
+输入：
+
+```
+SELECT DISTINCT vend_id
+FROM products;
+```
+
+只返回不同（唯一）的vend_id行
+
+### 4.6限制结果
+
+可使用LIMIT子句。
+
+输入
+
+```
+SELECT prod_name
+FROM products
+LIMIT 5;
+```
+
+分析
+
+LIMIT5指示MYSQL返回不多于5行。
+
+为得出下一个5行，可指定要检索的开始行和行数。
+
+输入
+
+```
+SELECT prod_name
+FROM products
+LIMIT 5.5;
+```
+
+分析
+
+LIMIT5,5指示MYSQL返回从行5开始的5行。第一个数为开始位置，第二个数为要检索的行数。
+
+* 总结
+
+带一个值的LIMIT总是从第一行开始，给出的数为返回的行数。带两个值的LIMIT可以指定从行号为第一个值的位置开始。
+
+* 注意
+
+行0   检索出来的第一行为行0而不是行1。
 
 
 
+
+
+------
 
 
 参考：MYSQL必知必会
