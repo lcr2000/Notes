@@ -192,9 +192,82 @@ LIMIT5,5指示MYSQL返回从行5开始的5行。第一个数为开始位置，�
 
 行0   检索出来的第一行为行0而不是行1。
 
+### 4.7使用完全限定的表名
 
+上面只是通过列名引用列，也可能会使用完全限定的名字来引用列（同时使用表名和列字）。
 
+输入
 
+```
+SELECT products.prod_name
+FROM products;
+```
+
+这里完全限定的列名。表名也可以是完全限定的。
+
+### 5.1排序数据
+
+为了明确地排序用SELECT语句检索出的数据，可使用ORDER BY子句。ORDER BY子句取一个或多个列的名字。
+
+```
+SELECT prod_name
+FROM products
+ORDER BY prod_name;
+```
+
+这条语句指示prod_name列以字母顺序排序。
+
+### 5.2按多个列排序
+
+经常需要按不止一个列进行数据排序。为了按多个列排序，只要指定列名，列名之间用逗号分开即可。
+
+输入
+
+```
+SELECT prod_id, prod_price, prod_name 
+FROM products;
+ORDER BY prod_price, prod_name;
+```
+
+上面的代码检索3个列，并按其中两个列对结果进行排序--首先按价格，然后再按名称排序。
+
+### 5.3 指定排序方向
+
+#### 指定DESC关键字进行降序排序
+
+输入
+
+```
+SELECT prod_id, prod_price, prod_name
+FROM products
+ORDER BY prod_price DESC;
+```
+
+如果打算用多个列排序，如
+
+输入
+
+```
+SELECT prod_id, prod_price, prod_name
+FROM products
+ORDER BY prod_price DESC, prod_name;
+```
+
+上面的例子以降序排序产品（最贵的在前面），然后再对产品名排序。
+
+分析
+
+DESC关键字只应用到直接位于其前面的列名，在上面例子中，只对prod_price列指定DESC，对prod_name列不指定。如果想在多个列进行降序排序，必须对每个列指定DESC关键字
+
+#### 指定ASC关键字进行升序排序
+
+实际上，ASC没有多大用处，因为升序是默认的。
+
+#### ORDER BY子句的位置
+
+在给出ORDER BY子句时，应该保证它位于FROM子句后。如果使用LIMIT，它必须位于ORDER BY之后。使用子句的次序不对将产生错误信息。
+
+### 6.1使用WHERE子句
 
 ------
 
