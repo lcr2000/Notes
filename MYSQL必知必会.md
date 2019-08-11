@@ -269,6 +269,28 @@ DESC关键字只应用到直接位于其前面的列名，在上面例子中，�
 
 ### 6.1使用WHERE子句
 
+数据库表一般包含大量的数据，很少才需要检索表中所有行。在SELECT语句中，数据根据WHERE子句中指定的搜索条件进行过滤。WHERE子句在表名（FROM子句）之后给出，如：
+
+输入
+
+```
+SELECT prod_name,prod_price
+FROM products
+WHERE prod_price = 2.50
+```
+
+分析
+
+这条语句从products表中检索两个列，但不是返回所有行，只返回prod_price值为2.5的行。
+
+#### WHERE子句的位置
+
+在同时使用ORDER BY和WHERE子句时，应该让ORDER BY位于WHERE之后。
+
+#### WHERE子句操作符
+
+
+
 ------
 
 
