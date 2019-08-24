@@ -2,9 +2,9 @@
 
 # [Golang知识点](https://github.com/fangguizhen/Notes/blob/master/Golang%E7%9F%A5%E8%AF%86%E7%82%B9.md)
 
-# [Mysql总结](https://github.com/fangguizhen/Notes/blob/master/Mysql.md)
+# [MySQL总结](https://github.com/fangguizhen/Notes/blob/master/Mysql.md)
 
-# [Mysql必知必会笔记](https://github.com/fangguizhen/Notes/blob/master/MYSQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A.md)
+# [MySQL必知必会笔记](https://github.com/fangguizhen/Notes/blob/master/MYSQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A.md)
 
 # [数据结构与算法](https://github.com/fangguizhen/Notes/blob/master/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95.md)
 
