@@ -289,6 +289,98 @@ WHERE prod_price = 2.50
 
 #### WHERE子句操作符
 
+### 6.2.1检查单个值
+
+输入
+
+```
+SELECT name, price
+FROM products
+WHERE name = 'fuses';
+```
+
+分析
+
+它返回name的值为Fuses的一行。MYSQL在执行匹配时默认不区分大小写。
+
+### 6.2.2不匹配检查
+
+输入
+
+```
+SELECT id, name
+FROM products
+WHERE id <> 1003;
+```
+
+分析
+
+以上例子列出不是由供应商1003制造的产品。下面是相同的例子
+
+```
+SELECT id, name
+FROM products
+WHERE id != 1003;
+```
+
+### 6.2.3范围值检查
+
+为了检查某个范围的值，可使用BETWEEN操作符。其语法与其他WHERE子句的操作符稍有不同，因为它需要两个值，即范围的开始值和结束值。
+
+输入
+
+```
+SELECT name, price
+FROM products
+WHERE price BETWEEN 5 AND 10;
+```
+
+### 6.2.4空值检查
+
+在创建表时，表设计人员可以指定其中的列是否可以不包含值。在一个列不包含值时，称其为包含空值NULL。
+
+SELECT语句有一个特殊的WHERE子句，可以用来检查具有NULL值的列。这个WHERE子句就是IS NULL子句。
+
+输入
+
+```
+SELECT name
+FROM products
+WHERE price IS NULL
+```
+
+分析
+
+这条语句返回没有价格的所有产品，由于表中没有这样的行，所以没有返回数据。
+
+### 7.1组合WHERE子句
+
+为了进行更强的过滤控制，MYSQL允许给出多个WHERE子句，这些子句可以使用两种方式使用：以AND子句的方式或OR子句的方式使用。
+
+#### 操作符
+
+用来联结或改变WHERE子句中的关键字。也称为逻辑操作符。
+
+### 7.1.1 AND操作符
+
+为了通过不止一个列进行过滤，可使用AND操作符给WHERE子句附加条件。每添加一条就使用一个AND。
+
+### 7.1.2 OR操作符
+
+OR操作符指示MySQL检索匹配任一条件的行。
+
+### 7.1.3计算次序
+
+WHERE可包含任意数目的AND和OR操作符。允许两者结合以进行复杂和高级的过滤。
+
+但是SQL在处理OR操作符前，优先处理AND操作符。此问题的解决方法是使用圆括号明确地分组相应的操作符。
+
+#### 在WHERE子句中使用圆括号
+
+任何时候使用具有AND和OR操作符的WHERE子句，都应该使用圆括号明确地分组操作符。
+
+### 7.2 IN操作符
+
 
 
 ------
