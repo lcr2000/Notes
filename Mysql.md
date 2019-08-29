@@ -41,15 +41,13 @@ SET SQL_SAFE_UPDATES = 0
 
 Truncate是一个能够快速清空资料表内所有资料的SQL语法。并且能针对具有自动递增值的字段，做计数重置归零重新计算的作用。
 
- 
-
 **一、Truncate语法**
 
 
 [ { database_name.[ schema_name ]. | schema_name . } ]
     table_name
 [ ; ]
- 
+
 
 **参数**
 
@@ -61,43 +59,24 @@ database_name
 schema_name
 表所属架构的名称。
 
-
 table_name
 要截断的表的名称，或要删除其全部行的表的名称。
 
- 
-
 **二、Truncate使用注意事项**
-
- 
 
 1、TRUNCATE TABLE 在功能上与不带 WHERE 子句的 DELETE 语句相同：二者均删除表中的全部行。但 TRUNCATE TABLE 比 DELETE 速度快，且使用的系统和事务日志资源少。
 
- 
-
 2、DELETE 语句每次删除一行，并在事务日志中为所删除的每行记录一项。TRUNCATE TABLE 通过释放存储表数据所用的数据页来删除数据，并且只在事务日志中记录页的释放。
-
- 
 
 3、TRUNCATE TABLE 删除表中的所有行，但表结构及其列、约束、索引等保持不变。新行标识所用的计数值重置为该列的种子。如果想保留标识计数值，请改用 DELETE。如果要删除表定义及其数据，请使用 DROP TABLE 语句。
 
- 
-
 4、对于由 FOREIGN KEY 约束引用的表，不能使用 TRUNCATE TABLE，而应使用不带 WHERE 子句的 DELETE 语句。由于 TRUNCATE TABLE 不记录在日志中，所以它不能激活触发器。
-
- 
 
 5、TRUNCATE TABLE 不能用于参与了索引视图的表。
 
- 
-
 6、对用TRUNCATE TABLE删除数据的表上增加数据时，要使用UPDATE STATISTICS来维护索引信息。
 
- 
-
 7、如果有ROLLBACK语句，DELETE操作将被撤销，但TRUNCATE不会撤销。
-
- 
 
 **三、不能对以下表使用 TRUNCATE TABLE**
 
@@ -113,10 +92,7 @@ table_name
 
 4、对于具有以上一个或多个特征的表，请使用 DELETE 语句。
 
-
 5、TRUNCATE TABLE 不能激活触发器，因为该操作不记录各个行删除。
-
- 
 
 **四、TRUNCATE、Drop、Delete区别**
 
@@ -137,7 +113,9 @@ table_name
 
 9、当你不再需要该表时， 用 drop；当你仍要保留该表，但要删除所有记录时， 用 truncate；当你要删除部分记录时（always with a WHERE clause), 用 delete.
 
+**truncate:会清空表中所有的数据，速度快，不可回滚；实质是删除整张表包括数据再重新创建表；**
 
+**delete:逐行删除数据，每步删除都是有日志记录的，可以回滚数据；实质是逐行删除表中的数据；**
 
 
 
