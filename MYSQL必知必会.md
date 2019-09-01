@@ -523,7 +523,36 @@ FROM vendors
 ORDER BY name;
 ```
 
+### 11.2.1文本处理函数
 
+使用Upper()函数将文本转换为大写
+
+输入
+
+```
+SELECT name, Upper(name) AS name_upcase
+FROM vendors
+ORDER BY name;
+```
+
+常用的文本处理函数
+
+| 函数        | 说明              |
+| ----------- | ----------------- |
+| left()      | 返回串左边的字符  |
+| length()    | 返回串的长度      |
+| locate()    | 找出串的一个子串  |
+| lower()     | 将串转换为小写    |
+| LTrim()     | 去掉串左边的空格  |
+| Right()     | 返回串右边的字符  |
+| RTrim()     | 去掉串右边的空格  |
+| Soundex()   | 返回串的SOUNDEX值 |
+| Upper()     | 将串转换为大写    |
+| SubString() | 返回子串的字符    |
+
+## 
+
+SOUNDEX是一个将任何文本串转换为描述其语音表示的字母数字模式的算法。他考虑了类似的发音字符和音节，使其能够对串进行发音而不是字母比较。
 
 
 
